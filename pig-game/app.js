@@ -7,9 +7,14 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
 
+ADDITIONAL RULES:
+- A play loses his entire score if he rolls two sixes in a roll
+- The player can set winning score
+- Add a second dice to the game. The player loses his current score when only one of them is an one. 
+
 */
 
-var scores, roundScore, activePlayer, gamePlaying; 
+var scores, roundScore, activePlayer, gamePlaying, previousDie; 
 
 function init () {
 	scores = [0, 0];
@@ -46,11 +51,17 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 		diceDOM.src = 'dice-' + dice + '.png' ;
 
 		// 3. Update the round score IF the rolled number was NOT a 1
-		if (dice !== 1) {
+		if (dice === 6 && previousDie === dice) {
+			scores[activePlayer] = 0;
+			document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+			nextPlayer();
+		} else if (dice !== 1) {
 			// Add score
 			roundScore += dice;
 			document.getElementById('current-' + activePlayer).textContent = roundScore;
-		} else {
+			previousDie = dice
+		}
+		else {
 			// Next player
 			// Ternarry operator 
 			nextPlayer();
@@ -88,7 +99,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 		document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
 		// Check if the player won the game
-		if (scores[activePlayer] >= 20) {
+		if (scores[activePlayer] >= 100) {
 			document.getElementById('name-' + activePlayer).textContent = 'Winner!';
 			document.querySelector('.dice').style.display = 'none';
 			document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'); 
