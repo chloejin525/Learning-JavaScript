@@ -140,6 +140,7 @@ i {
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
+.btn-set-score {top: 80px;}
 
 .dice {
     position: absolute;
@@ -152,3 +153,33 @@ i {
 
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+
+/**********************************************
+*** Set scores
+**********************************************/
+.set-score {
+    position: absolute;
+    top: 80px;
+    margin-left: 390px;
+    font-size: 20px;
+}
+
+.btn-set-score{
+    top: 0;
+    left: 280px;
+}
+
+
+#winning-score{
+    width: 50px;
+    font-size: 20px;
+}
+
+ul {
+    text-decoration: none;
+}
+
+li {
+    display: inline-block;
+}

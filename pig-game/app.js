@@ -14,7 +14,14 @@ ADDITIONAL RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying, previousDie; 
+var scores, roundScore, activePlayer, gamePlaying, previousDie, winningScore; 
+
+function setWinningScore() {
+	winningScore = document.getElementById("winning-score").value ;
+	};
+
+document.querySelector('.btn-set-score').addEventListener('click', setWinningScore);
+
 
 function init () {
 	scores = [0, 0];
@@ -33,6 +40,7 @@ function init () {
 	document.querySelector('.player-1-panel').classList.remove('active');
 	document.querySelector('.player-0-panel').classList.add('active');
 	gamePlaying = true;
+	setWinningScore();
 }
 
 init()
@@ -99,7 +107,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 		document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
 		// Check if the player won the game
-		if (scores[activePlayer] >= 100) {
+		if (scores[activePlayer] >= winningScore) {
 			document.getElementById('name-' + activePlayer).textContent = 'Winner!';
 			document.querySelector('.dice').style.display = 'none';
 			document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'); 
