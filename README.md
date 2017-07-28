@@ -1,0 +1,1 @@
+Here are all the projects I've done while learning JavaScript from Udemy
