@@ -16,12 +16,7 @@ ADDITIONAL RULES:
 
 var scores, roundScore, activePlayer, gamePlaying, previousDie, winningScore; 
 
-function setWinningScore() {
-	winningScore = document.getElementById("winning-score").value ;
-	};
-
-document.querySelector('.btn-set-score').addEventListener('click', setWinningScore);
-
+winningScore = document.querySelector(".final-score").value ;
 
 function init () {
 	scores = [0, 0];
@@ -40,7 +35,7 @@ function init () {
 	document.querySelector('.player-1-panel').classList.remove('active');
 	document.querySelector('.player-0-panel').classList.add('active');
 	gamePlaying = true;
-	setWinningScore();
+	
 }
 
 init()

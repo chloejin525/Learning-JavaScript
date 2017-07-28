@@ -158,28 +158,26 @@ i {
 /**********************************************
 *** Set scores
 **********************************************/
-.set-score {
-    position: absolute;
-    top: 80px;
-    margin-left: 390px;
-    font-size: 20px;
+p {
+    position:  absolute;
+    left: 42%;    
+    top: 490px;
+    font-size: 18px;
+}
+.final-score {
+    position:  absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 520px;
+    color: #555;
+    font-size: 18px;
+    font-family: 'Lato';
+    text-align: center;
+    padding: 10px;
+    width: 160px;
+    text-transform:  uppercase;
 }
 
-.btn-set-score{
-    top: 0;
-    left: 280px;
-}
-
-
-#winning-score{
-    width: 50px;
-    font-size: 20px;
-}
-
-ul {
-    text-decoration: none;
-}
-
-li {
-    display: inline-block;
+.final-score:focus {
+    outline: none;
 }
