@@ -10,41 +10,33 @@ But you have to take one silly exception into account: by a historical accident,
 
 // The console.log line in the function helps locate where the comparison stops
 
-function deepEqual(a,b){
-  if (typeof a === typeof b){
-    if (a === b) {
-      // console.log(1);
-      return true;
-    } else if (typeof a === 'object'){
-      if (Object.keys(a).length===Object.keys(b).length) {
-        for (var i = 0; i < Object.keys(a).length; i++) {
-          var keyA = Object.keys(a)[i];
-          var keyB = Object.keys(b)[i];
-          var valueA = Object.values(a)[i];
-          var valueB = Object.values(b)[i];
-          if (keyA !== keyB || valueA !== valueB ) {
-            // console.log(2);
-            return false;
-          }
-        }
-        // console.log(3);
-        return true;
-      }
-      else {
-        // console.log(4);
-        return false;
-      }
-    } else {
-      // console.log(5);
-      return false;
-    }
-  } else {
+function deepEqual(a, b) {
+  if (a === b) return true;
+  
+  if (a == null || typeof a != "object" ||
+      b == null || typeof b != "object")
     return false;
+  
+  var propsInA = 0, propsInB = 0;
+
+  for (var prop in a)
+    propsInA += 1;
+
+  for (var prop in b) {
+    propsInB += 1;
+    if (!(prop in a) || !deepEqual(a[prop], b[prop]))
+      return false;
   }
+
+  return propsInA == propsInB;
 }
 
-var obj1 = { value: 1 , name: "apple"};
-var obj2 = { value: 1 , name: "pear"};
-deepEqual(obj1, obj2);
+var obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+// → true
+console.log(deepEqual(obj, {here: 1, object: 2}));
+// → false
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+// → true
 
 
