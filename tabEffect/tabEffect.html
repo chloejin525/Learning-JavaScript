@@ -16,6 +16,8 @@
 	</div>
 
 	<script type="text/javascript">
+		/* First Method: Add event listener while creating each button */
+		/*
 		function asTabs(node) {
 		  //create a new div for all the buttons
 		  var newDiv = document.createElement('div');
@@ -28,6 +30,7 @@
 		    button.textContent=tab.getAttribute('data-tabname');
 		    tab.style.display='none';
 		    newDiv.appendChild(button);
+		    //add event listener while creating each button
 		    button.addEventListener('click', function(){
 		    	selectTab(i);
 		    });
@@ -51,6 +54,45 @@
 		  }
 		  selectTab(0);
 		}
+		*/
+	  /* Second Method: Add event listener for each button after all the buttons are created */
+  	function asTabs(node) {
+  	  //create a new div for all the buttons
+  	  var newDiv = document.createElement('div');
+  	  var tabs = node.querySelectorAll('div');
+  	  node.insertBefore(newDiv, tabs[0]);
+
+  	  //create new buttons in the new div
+  	  tabs.forEach(function(tab, i) {
+  	    var button = document.createElement('button');
+  	    button.textContent = tab.getAttribute('data-tabname');
+  	    tab.style.display = 'none';
+  	    newDiv.appendChild(button);
+  	  })
+
+  	  //Create Tab Effect 
+  	  var buttons = node.querySelectorAll('button');
+
+  	  // use let to preven closure
+  	  for (let a = 0; a < buttons.length; a++) {
+  	    // add event listener for each button after all the buttons are created
+  	    buttons[a].addEventListener('click', function() {
+  	      for (let b = 0; b < buttons.length; b++) {
+  	        if (a === b)
+  	          buttons[a].style.backgroundColor = 'red';
+  	        else
+  	          buttons[b].style.backgroundColor = '';
+  	      }
+  	      for (let b = 0; b < tabs.length; b++) {
+  	        if (a === b)
+  	          tabs[a].style.display = 'block';
+  	        else
+  	          tabs[b].style.display = 'none';
+  	      }
+  	    });
+  	  }
+  	}
+	  
 		asTabs(document.querySelector("#wrapper"));
 	</script>
 
