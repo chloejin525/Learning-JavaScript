@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mouse Trail Exercise</title>
+</head>
+<style>
+  .trail { /* className for the trail elements */
+    position: absolute;
+    height: 6px; width: 6px;
+    border-radius: 3px;
+    background: teal;
+  }
+  body {
+    height: 300px;
+  }
+  h1 {
+  	text-align: center;
+  }
+</style>
+
+<body>
+	<h1> Move Your Mouse! </h1>
+	<script type="text/javascript">
+		var trail = [];
+		addEventListener("mousemove", function(event) {
+		  var dot = document.createElement('div');
+		  dot.className = "trail";
+		  dot.style.left = (event.pageX - 6) + "px";
+		  dot.style.top = (event.pageY - 6) + "px";
+		  if (trail.length >= 10) {
+		    document.body.removeChild(trail[0]);
+		    trail.shift();
+		    trail.push(dot);
+		  } else {
+		    trail.push(dot);
+		  }
+		  for (var i = trail.length - 1; i >= 0; i--) {
+		    document.body.appendChild(trail[i]);
+		  }
+		});
+	</script>
+
+</body>
+</html>
