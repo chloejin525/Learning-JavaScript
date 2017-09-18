@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Autocompletion</title>
+</head>
+<style type="text/css">
+	#area {
+		margin-top: 50px;
+		text-align: center;
+	}
+
+	#field {
+		background-color: lightpink;
+	}
+</style>
+<body>
+	<div id="area">
+		<h2>Type Something: </h2>
+		<input type="text" id="field">
+		<div id="suggestions" style="cursor: pointer"></div>
+	</div>
+
+	<script type="text/javascript">
+		// Builds up an array with global variable names, like
+		// 'alert', 'document', and 'scrollTo'
+		var terms = [];
+		for (var name in window)
+		  terms.push(name);
+
+		// Select elements
+		var textarea = document.querySelector('input');
+		var suggestions = document.getElementById('suggestions');
+
+		// Create Suggestions
+		textarea.addEventListener('input', function(){
+			suggestions.innerHTML = "";
+    	terms.forEach(function(term){
+    		if (term.startsWith(textarea.value)) {
+					var suggestion = document.createElement('p');
+					suggestion.textContent = term;
+	    		suggestions.appendChild(suggestion);
+    		}
+    	})
+		})
+		// Create click event 
+		addEventListener('click', function(event){
+			if (event.target.parentNode === suggestions) {
+				textarea.value=event.target.textContent;
+				suggestions.innerHTML = "";
+			}
+		})
+
+	</script>
+</body>
+</html>
